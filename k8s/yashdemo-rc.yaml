@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: yashdemo
+  namespace: com-att-ocnp-mgmt
+spec:
+  replicas: 1
+  selector:
+    app: yashdemo
+  template:
+    metadata:
+      labels:
+        app: yashdemo
+    spec:
+      serviceAccount: YOUR
+      containers:
+      - name: yashdemo
+        image: ${docker-registry}/${docker-namespace}/yashdemo:latest
+        imagePullPolicy: Always
+        ports:
+         - containerPort: 8080
